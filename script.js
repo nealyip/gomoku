@@ -24,6 +24,9 @@ const playAgainButton = document.getElementById("playAgainBtn");
 const closeModalButton = document.getElementById("closeModalBtn");
 const resultTitleElement = document.getElementById("resultTitle");
 const resultTextElement = document.getElementById("resultText");
+const difficultySelectElement = document.getElementById("difficultySelect");
+const mobileDifficultySelectElement = document.getElementById("mobileDifficultySelect");
+const mobileRestartButton = document.getElementById("mobileRestartBtn");
 
 let board = [];
 let gameOver = false;
@@ -32,6 +35,7 @@ let moveCount = 0;
 let showHint = true;
 let lastMove = null;
 let winningCells = [];
+let robotDifficulty = "normal";
 
 function createBoard() {
   boardElement.innerHTML = "";
@@ -230,6 +234,15 @@ function collectLine(row, col, dr, dc, player) {
 
 function chooseRobotMove() {
   const candidates = getCandidateMoves();
+
+  if (robotDifficulty === "expert") {
+    return chooseExpertMove(candidates);
+  }
+
+  return chooseNormalMove(candidates);
+}
+
+function chooseNormalMove(candidates) {
   let bestScore = -Infinity;
   let bestMoves = [];
 
@@ -249,6 +262,27 @@ function chooseRobotMove() {
   }
 
   return bestMoves[Math.floor(Math.random() * bestMoves.length)];
+}
+
+function chooseExpertMove(candidates) {
+  const rankedCandidates = candidates
+    .map((move) => ({ ...move, score: evaluateMove(move.row, move.col) }))
+    .sort((a, b) => b.score - a.score);
+
+  const shortlisted = rankedCandidates.slice(0, 8);
+  let bestMove = null;
+  let bestScore = -Infinity;
+
+  for (const move of shortlisted) {
+    const score = evaluateExpertMove(move.row, move.col, move.score);
+
+    if (score > bestScore) {
+      bestScore = score;
+      bestMove = move;
+    }
+  }
+
+  return bestMove ?? rankedCandidates[0] ?? null;
 }
 
 function getCandidateMoves() {
@@ -291,6 +325,38 @@ function hasNearbyStone(row, col) {
   return false;
 }
 
+function getCandidateMovesForBoard(currentBoard) {
+  const candidates = [];
+
+  for (let row = 0; row < BOARD_SIZE; row += 1) {
+    for (let col = 0; col < BOARD_SIZE; col += 1) {
+      if (currentBoard[row][col] !== EMPTY || !hasNearbyStoneOnBoard(currentBoard, row, col)) {
+        continue;
+      }
+
+      candidates.push({ row, col });
+    }
+  }
+
+  return candidates.length > 0 ? candidates : [{ row: 7, col: 7 }];
+}
+
+function hasNearbyStoneOnBoard(currentBoard, row, col) {
+  for (let r = row - 2; r <= row + 2; r += 1) {
+    for (let c = col - 2; c <= col + 2; c += 1) {
+      if (!isInside(r, c) || (r === row && c === col)) {
+        continue;
+      }
+
+      if (currentBoard[r][c] !== EMPTY) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
 function evaluateMove(row, col) {
   let totalScore = 0;
 
@@ -312,6 +378,44 @@ function evaluateMove(row, col) {
   board[row][col] = EMPTY;
 
   return totalScore;
+}
+
+function evaluateExpertMove(row, col, baseScore = evaluateMove(row, col)) {
+  board[row][col] = ROBOT;
+
+  if (checkWin(row, col, ROBOT)) {
+    board[row][col] = EMPTY;
+    return 2_000_000;
+  }
+
+  const playerReplies = getCandidateMovesForBoard(board)
+    .map((reply) => evaluateThreat(reply.row, reply.col, PLAYER))
+    .sort((a, b) => b - a);
+  const strongestReply = playerReplies[0] ?? 0;
+
+  const robotFollowUps = getCandidateMovesForBoard(board)
+    .slice(0, 10)
+    .map((followUp) => evaluateThreat(followUp.row, followUp.col, ROBOT))
+    .sort((a, b) => b - a);
+  const bestFollowUp = robotFollowUps[0] ?? 0;
+
+  board[row][col] = EMPTY;
+
+  return baseScore * 1.18 + bestFollowUp * 0.42 - strongestReply * 0.72;
+}
+
+function evaluateThreat(row, col, player) {
+  board[row][col] = player;
+  let score;
+
+  if (checkWin(row, col, player)) {
+    score = 1_200_000;
+  } else {
+    score = evaluatePatterns(row, col, player) + evaluatePositionalScore(row, col);
+  }
+
+  board[row][col] = EMPTY;
+  return score;
 }
 
 function evaluatePatterns(row, col, player) {
@@ -418,6 +522,13 @@ restartButton.addEventListener("click", resetGame);
 playAgainButton.addEventListener("click", resetGame);
 closeModalButton.addEventListener("click", hideResultModal);
 resultBackdropElement.addEventListener("click", hideResultModal);
+difficultySelectElement.addEventListener("change", (event) => {
+  setRobotDifficulty(event.target.value);
+});
+mobileDifficultySelectElement.addEventListener("change", (event) => {
+  setRobotDifficulty(event.target.value);
+});
+mobileRestartButton.addEventListener("click", resetGame);
 
 toggleButton.addEventListener("click", () => {
   showHint = !showHint;
@@ -434,3 +545,9 @@ document.addEventListener("keydown", (event) => {
 
 createBoard();
 resetGame();
+
+function setRobotDifficulty(nextDifficulty) {
+  robotDifficulty = nextDifficulty;
+  difficultySelectElement.value = nextDifficulty;
+  mobileDifficultySelectElement.value = nextDifficulty;
+}

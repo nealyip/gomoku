@@ -29,6 +29,10 @@ body.modal-open {
   overflow: hidden;
 }
 
+.mobile-sticky-bar {
+  display: none;
+}
+
 body::before,
 body::after {
   content: "";
@@ -145,10 +149,46 @@ h1 {
   border: 1px solid rgba(100, 57, 25, 0.14);
 }
 
+.difficulty-card {
+  padding: 1rem 1.1rem;
+  border-radius: 20px;
+  background: rgba(255, 248, 233, 0.72);
+  border: 1px solid rgba(100, 57, 25, 0.14);
+}
+
 .status-card strong {
   display: block;
   margin-top: 0.4rem;
   font-size: 1.1rem;
+}
+
+.difficulty-card select {
+  width: 100%;
+  margin-top: 0.5rem;
+  border: 1px solid rgba(107, 61, 26, 0.18);
+  border-radius: 14px;
+  padding: 0.75rem 0.9rem;
+  font: inherit;
+  color: var(--text);
+  background: rgba(255, 252, 245, 0.92);
+  appearance: none;
+}
+
+.mobile-sticky-field {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.mobile-sticky-field select {
+  width: 100%;
+  border: 1px solid rgba(107, 61, 26, 0.16);
+  border-radius: 14px;
+  padding: 0.72rem 0.85rem;
+  font: inherit;
+  color: var(--text);
+  background: rgba(255, 251, 243, 0.96);
+  appearance: none;
 }
 
 .button-row {
@@ -519,6 +559,60 @@ button.secondary {
 }
 
 @media (max-width: 560px) {
+  .mobile-sticky-bar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: block;
+    padding: 0.2rem 0.45rem 0;
+  }
+
+  .mobile-sticky-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.5rem;
+    width: min(100vw - 1rem, 100%);
+    margin: 0 auto;
+    padding: 0.35rem 0.45rem;
+    border-radius: 16px;
+    background: rgba(255, 248, 236, 0.78);
+    border: 1px solid rgba(107, 61, 26, 0.12);
+    box-shadow: 0 6px 16px rgba(58, 29, 14, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .mobile-sticky-inner button {
+    width: auto;
+    white-space: nowrap;
+    min-height: 36px;
+    padding: 0.55rem 0.85rem;
+    padding-inline: 0.85rem;
+    border-radius: 999px;
+    box-shadow: 0 6px 14px rgba(146, 67, 24, 0.16);
+  }
+
+  .mobile-sticky-field {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .mobile-sticky-field .label {
+    margin: 0;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .mobile-sticky-field select {
+    margin: 0;
+    min-height: 36px;
+    border-radius: 10px;
+    padding: 0.5rem 0.75rem;
+  }
+
   .app-shell {
     width: min(100vw - 1rem, 100%);
     padding-top: 0.5rem;
