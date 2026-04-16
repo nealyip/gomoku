@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>五子棋對戰</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero-panel">
+      <p class="eyebrow">GOMOKU</p>
+      <h1>五子棋<br>人機對戰</h1>
+      <p class="intro">
+        你先手執黑子，電腦會用簡單攻守評分去應對。先連成五子就贏。
+      </p>
+
+      <div class="controls">
+        <div class="status-card">
+          <span class="label">目前狀態</span>
+          <strong id="status">輪到你落子</strong>
+        </div>
+
+        <div class="button-row">
+          <button id="restartBtn" type="button">重新開局</button>
+          <button id="toggleBtn" type="button" class="secondary">關閉提示</button>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div><span class="stone black"></span> 玩家</div>
+        <div><span class="stone white"></span> Robot</div>
+      </div>
+    </section>
+
+    <section class="board-panel">
+      <div class="board-header">
+        <div>
+          <p class="board-title">15 x 15 棋盤</p>
+          <p class="board-subtitle">點一下交叉位落子</p>
+        </div>
+        <div class="move-counter">
+          <span>步數</span>
+          <strong id="moveCount">0</strong>
+        </div>
+      </div>
+
+      <div class="board-wrap">
+        <div id="board" class="board" aria-label="五子棋棋盤" role="grid"></div>
+      </div>
+
+      <p class="hint" id="hint">提示已開啟：會標示 robot 上一步。</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
