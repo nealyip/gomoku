@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nealyip.github.io/gomoku/sitemap.xml

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Gomoku favicon">
+  <rect width="64" height="64" rx="14" fill="#edd09a"/>
+  <g stroke="#5a3a1f" stroke-width="2.2" opacity="0.8">
+    <path d="M14 10v44M25 10v44M36 10v44M47 10v44"/>
+    <path d="M10 14h44M10 25h44M10 36h44M10 47h44"/>
+  </g>
+  <circle cx="25" cy="25" r="6.5" fill="#1f1f1f"/>
+  <circle cx="39" cy="39" r="6.5" fill="#f8f3ea" stroke="#d2c6b6" stroke-width="1.2"/>
+</svg>

@@ -112,6 +112,22 @@ h1 {
   line-height: 1.7;
 }
 
+.hero-points {
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  color: var(--muted);
+}
+
+.hero-points li {
+  padding: 0.75rem 0.9rem;
+  border-radius: 16px;
+  background: rgba(255, 248, 233, 0.72);
+  border: 1px solid rgba(107, 61, 26, 0.12);
+}
+
 .controls {
   display: grid;
   gap: 1rem;
@@ -196,6 +212,38 @@ button.secondary {
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1rem;
+}
+
+.seo-copy {
+  margin-bottom: 1.2rem;
+  padding: 1rem 1.1rem;
+  border-radius: 20px;
+  background: rgba(255, 247, 230, 0.68);
+  border: 1px solid rgba(107, 61, 26, 0.1);
+}
+
+.seo-kicker,
+.content-label {
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.seo-copy h2,
+.content-card h2 {
+  margin: 0;
+  font-family: "Noto Serif TC", serif;
+  font-size: clamp(1.45rem, 3.5vw, 2.2rem);
+}
+
+.seo-copy p,
+.content-card p,
+.faq-list p,
+.content-list {
+  color: rgba(45, 27, 16, 0.82);
+  line-height: 1.75;
 }
 
 .board-subtitle,
@@ -301,6 +349,53 @@ button.secondary {
   margin-top: 1rem;
 }
 
+.content-shell {
+  width: min(1180px, calc(100vw - 2rem));
+  margin: 0 auto 3rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.content-card {
+  padding: 1.5rem;
+  border-radius: 28px;
+  border: 1px solid rgba(107, 61, 26, 0.18);
+  background:
+    linear-gradient(180deg, rgba(255, 249, 238, 0.85), rgba(237, 214, 174, 0.82)),
+    rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow);
+}
+
+.content-list {
+  margin: 1rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.faq-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.faq-list article {
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  background: rgba(255, 247, 230, 0.68);
+  border: 1px solid rgba(107, 61, 26, 0.1);
+}
+
+.faq-list h3 {
+  margin: 0 0 0.45rem;
+  font-size: 1rem;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(0.86);
@@ -316,6 +411,7 @@ button.secondary {
 @media (max-width: 900px) {
   .app-shell {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .hero-panel {
@@ -324,6 +420,11 @@ button.secondary {
 
   .board {
     width: min(100%, 680px);
+  }
+
+  .content-grid,
+  .faq-list {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -348,5 +449,15 @@ button.secondary {
 
   button {
     width: 100%;
+  }
+
+  .content-shell {
+    width: min(100vw - 1rem, 100%);
+    margin-bottom: 2rem;
+  }
+
+  .content-card {
+    padding: 1.2rem;
+    border-radius: 24px;
   }
 }

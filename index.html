@@ -3,20 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>五子棋對戰</title>
+  <title>Play Gomoku Online Free | 五子棋人機對戰 Web Game</title>
+  <meta name="description" content="Play Gomoku online for free in your browser. Enjoy a mobile-friendly five-in-a-row web game with a simple robot opponent, instant restart, and no download required.">
+  <meta name="keywords" content="gomoku online, play gomoku, five in a row, 五子棋, 五子棋 線上, 五子棋 web game, browser game">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Neal Yip">
+  <link rel="canonical" href="https://nealyip.github.io/gomoku/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Play Gomoku Online Free | 五子棋人機對戰 Web Game">
+  <meta property="og:description" content="Free browser-based Gomoku with a simple robot opponent. Play five-in-a-row on desktop or mobile with no download.">
+  <meta property="og:url" content="https://nealyip.github.io/gomoku/">
+  <meta property="og:site_name" content="Gomoku Web Game">
+  <meta property="og:image" content="https://nealyip.github.io/gomoku/social-preview.svg">
+  <meta property="og:image:type" content="image/svg+xml">
+  <meta property="og:image:alt" content="Gomoku web game preview with a wooden board and black and white stones">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Play Gomoku Online Free">
+  <meta name="twitter:description" content="A free browser-based Gomoku game with a simple AI robot opponent.">
+  <meta name="twitter:image" content="https://nealyip.github.io/gomoku/social-preview.svg">
+  <meta name="theme-color" content="#d7b884">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Gomoku Web Game",
+      "url": "https://nealyip.github.io/gomoku/",
+      "image": "https://nealyip.github.io/gomoku/social-preview.svg",
+      "description": "A free browser-based Gomoku game with a simple robot opponent. Play five-in-a-row online on desktop or mobile.",
+      "genre": ["Strategy game", "Board game", "Puzzle game"],
+      "gamePlatform": ["Web browser", "Mobile web"],
+      "inLanguage": ["en", "zh-Hant"],
+      "applicationCategory": "Game",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Neal Yip"
+      }
+    }
+  </script>
 </head>
 <body>
   <main class="app-shell">
     <section class="hero-panel">
       <p class="eyebrow">GOMOKU</p>
-      <h1>五子棋<br>人機對戰</h1>
+      <h1>Play Gomoku Online<br>五子棋人機對戰</h1>
       <p class="intro">
-        你先手執黑子，電腦會用簡單攻守評分去應對。先連成五子就贏。
+        Play a free five-in-a-row web game in your browser. 你先手執黑子，電腦會用簡單攻守評分去應對，先連成五子就贏。
       </p>
+
+      <ul class="hero-points" aria-label="遊戲特色">
+        <li>Free to play, no download required</li>
+        <li>15 x 15 Gomoku board with instant restart</li>
+        <li>Mobile-friendly browser gameplay</li>
+      </ul>
 
       <div class="controls">
         <div class="status-card">
@@ -37,6 +86,14 @@
     </section>
 
     <section class="board-panel">
+      <div class="seo-copy">
+        <p class="seo-kicker">Free browser game</p>
+        <h2>Play five-in-a-row against a simple robot</h2>
+        <p>
+          This online Gomoku game is built for quick matches on desktop and mobile. If you are looking for a free browser Gomoku game, a five-in-a-row puzzle, or a simple 五子棋 AI practice board, you can start instantly right here.
+        </p>
+      </div>
+
       <div class="board-header">
         <div>
           <p class="board-title">15 x 15 棋盤</p>
@@ -55,6 +112,70 @@
       <p class="hint" id="hint">提示已開啟：會標示 robot 上一步。</p>
     </section>
   </main>
+
+  <section class="content-shell" aria-label="Game information">
+    <section class="content-card">
+      <p class="content-label">About This Game</p>
+      <h2>What is Gomoku?</h2>
+      <p>
+        Gomoku, also known as Five in a Row, is a classic strategy board game where two sides take turns placing stones on a grid. The goal is simple: connect five stones in a row horizontally, vertically, or diagonally before your opponent does.
+      </p>
+      <p>
+        呢個版本係一隻即開即玩嘅五子棋 web game，唔使下載 app，開瀏覽器就可以同簡單 robot 對戰，適合練手、摸規則、或者快速玩一局。
+      </p>
+    </section>
+
+    <section class="content-grid" aria-label="Gameplay details">
+      <article class="content-card">
+        <p class="content-label">How To Play</p>
+        <h2>玩法</h2>
+        <ol class="content-list">
+          <li>玩家執黑子，第一手先落。</li>
+          <li>每次點一下棋盤交叉位，就會喺該位置落子。</li>
+          <li>Robot 會即時回應，並優先處理進攻同防守機會。</li>
+          <li>任何一方先連成五子，就取得勝利。</li>
+        </ol>
+      </article>
+
+      <article class="content-card">
+        <p class="content-label">Why This Version</p>
+        <h2>特色</h2>
+        <ul class="content-list">
+          <li>免費線上遊玩，適合快速開局。</li>
+          <li>支援手機與桌面瀏覽器。</li>
+          <li>簡單 AI 對手，適合新手練習基本攻守。</li>
+          <li>有即時狀態提示、步數統計、重新開始與提示開關。</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="content-card faq-card" aria-label="Frequently asked questions">
+      <p class="content-label">FAQ</p>
+      <h2>Common questions about this Gomoku game</h2>
+
+      <div class="faq-list">
+        <article>
+          <h3>Can I play Gomoku online for free?</h3>
+          <p>Yes. This is a free browser-based Gomoku game that runs directly in your web browser with no sign-up and no download.</p>
+        </article>
+
+        <article>
+          <h3>Can I play against a robot?</h3>
+          <p>Yes. The game includes a simple robot opponent that evaluates attacking chances, blocking moves, and board position.</p>
+        </article>
+
+        <article>
+          <h3>Does this Gomoku game work on mobile?</h3>
+          <p>Yes. The layout is responsive, so you can play on phones, tablets, and desktop browsers.</p>
+        </article>
+
+        <article>
+          <h3>How do you win in Gomoku?</h3>
+          <p>You win by placing five stones in a continuous line horizontally, vertically, or diagonally before the robot does.</p>
+        </article>
+      </div>
+    </section>
+  </section>
 
   <script src="script.js"></script>
 </body>
