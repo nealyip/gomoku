@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260417-7">
+  <link rel="stylesheet" href="style.css?v=20260417-13">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -62,6 +62,10 @@
           <option value="expert">高手</option>
         </select>
       </label>
+      <div class="mobile-sticky-stats" aria-live="polite">
+        <img id="mobileBadge" class="badge-image" src="badge-bronze.svg" alt="銅章">
+        <strong id="mobileRecord">0 勝 0 負</strong>
+      </div>
       <button id="mobileRestartBtn" type="button">重新開始</button>
     </div>
   </div>
@@ -92,6 +96,15 @@
             <option value="normal" selected>標準</option>
             <option value="expert">高手</option>
           </select>
+        </div>
+
+        <div class="stats-card" aria-live="polite">
+          <span class="label">玩家戰績</span>
+          <div class="stats-topline">
+            <img id="badgeText" class="badge-image badge-image-large" src="badge-bronze.svg" alt="銅章">
+            <span id="difficultyLabel">標準模式</span>
+          </div>
+          <p id="recordSummary" class="stats-summary">0 勝 0 負 0 和</p>
         </div>
 
         <div class="button-row">
@@ -214,6 +227,6 @@
     </section>
   </div>
 
-  <script src="script.js?v=20260417-7"></script>
+  <script src="script.js?v=20260417-13"></script>
 </body>
 </html>

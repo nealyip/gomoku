@@ -27,6 +27,13 @@ const resultTextElement = document.getElementById("resultText");
 const difficultySelectElement = document.getElementById("difficultySelect");
 const mobileDifficultySelectElement = document.getElementById("mobileDifficultySelect");
 const mobileRestartButton = document.getElementById("mobileRestartBtn");
+const badgeTextElement = document.getElementById("badgeText");
+const difficultyLabelElement = document.getElementById("difficultyLabel");
+const recordSummaryElement = document.getElementById("recordSummary");
+const mobileBadgeElement = document.getElementById("mobileBadge");
+const mobileRecordElement = document.getElementById("mobileRecord");
+
+const STATS_STORAGE_KEY = "gomoku-stats-v1";
 
 let board = [];
 let gameOver = false;
@@ -36,6 +43,7 @@ let showHint = true;
 let lastMove = null;
 let winningCells = [];
 let robotDifficulty = "normal";
+let stats = loadStats();
 
 function createBoard() {
   boardElement.innerHTML = "";
@@ -67,6 +75,7 @@ function resetGame() {
   hintElement.textContent = showHint ? "提示已開啟：會標示 robot 上一步的位置。" : "提示已關閉。";
   hideResultModal();
   clearWinLine();
+  updateStatsUI();
   renderBoard();
 }
 
@@ -167,6 +176,7 @@ function finishGame(message, lineCells = []) {
   robotThinking = false;
   winningCells = lineCells;
   updateStatus(message);
+  recordGameResult(message);
   if (lineCells.length > 0) {
     drawWinLine(lineCells);
   } else {
@@ -508,6 +518,91 @@ function showResultModal(message) {
   document.body.classList.add("modal-open");
 }
 
+function loadStats() {
+  const fallback = {
+    normal: { wins: 0, losses: 0, draws: 0 },
+    expert: { wins: 0, losses: 0, draws: 0 },
+  };
+
+  try {
+    const raw = window.localStorage.getItem(STATS_STORAGE_KEY);
+    if (!raw) {
+      return fallback;
+    }
+
+    const parsed = JSON.parse(raw);
+    return {
+      normal: sanitizeStatsBucket(parsed.normal),
+      expert: sanitizeStatsBucket(parsed.expert),
+    };
+  } catch {
+    return fallback;
+  }
+}
+
+function sanitizeStatsBucket(bucket) {
+  return {
+    wins: Number(bucket?.wins) || 0,
+    losses: Number(bucket?.losses) || 0,
+    draws: Number(bucket?.draws) || 0,
+  };
+}
+
+function saveStats() {
+  window.localStorage.setItem(STATS_STORAGE_KEY, JSON.stringify(stats));
+}
+
+function recordGameResult(message) {
+  const bucket = stats[robotDifficulty];
+
+  if (message.includes("平手")) {
+    bucket.draws += 1;
+  } else if (message.includes("Robot")) {
+    bucket.losses += 1;
+  } else if (message.includes("你贏了")) {
+    bucket.wins += 1;
+  }
+
+  saveStats();
+  updateStatsUI();
+}
+
+function updateStatsUI() {
+  const bucket = stats[robotDifficulty];
+  const badge = getBadgeForStats(bucket);
+  const difficultyName = robotDifficulty === "expert" ? "高手模式" : "標準模式";
+
+  difficultyLabelElement.textContent = difficultyName;
+  recordSummaryElement.textContent = `${bucket.wins} 勝 ${bucket.losses} 負 ${bucket.draws} 和`;
+  badgeTextElement.src = badge.image;
+  badgeTextElement.alt = badge.label;
+  mobileBadgeElement.src = badge.image;
+  mobileBadgeElement.alt = badge.label;
+  mobileRecordElement.textContent = `${bucket.wins} 勝 ${bucket.losses} 負`;
+}
+
+function getBadgeForStats(bucket) {
+  const netWins = bucket.wins - bucket.losses;
+
+  if (netWins >= 50) {
+    return { label: "白金章", image: "badge-platinum.svg" };
+  }
+
+  if (netWins >= 40) {
+    return { label: "鑽石章", image: "badge-diamond.svg" };
+  }
+
+  if (netWins >= 30) {
+    return { label: "金章", image: "badge-gold.svg" };
+  }
+
+  if (netWins >= 20) {
+    return { label: "銀章", image: "badge-silver.svg" };
+  }
+
+  return { label: "銅章", image: "badge-bronze.svg" };
+}
+
 function hideResultModal() {
   resultModalElement.classList.remove("open");
   resultModalElement.setAttribute("aria-hidden", "true");
@@ -550,4 +645,5 @@ function setRobotDifficulty(nextDifficulty) {
   robotDifficulty = nextDifficulty;
   difficultySelectElement.value = nextDifficulty;
   mobileDifficultySelectElement.value = nextDifficulty;
+  updateStatsUI();
 }

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 180" role="img" aria-label="Platinum badge">
+  <defs>
+    <linearGradient id="platinumMedal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fcfffd"/>
+      <stop offset="42%" stop-color="#b8f2e8"/>
+      <stop offset="100%" stop-color="#5fa89f"/>
+    </linearGradient>
+    <linearGradient id="platinumRibbon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e5fff9"/>
+      <stop offset="100%" stop-color="#78beb3"/>
+    </linearGradient>
+  </defs>
+  <path d="M48 96h24l8 18 8-18h24l-12 62-20-18-20 18z" fill="url(#platinumRibbon)"/>
+  <circle cx="80" cy="70" r="46" fill="#67b4aa"/>
+  <circle cx="80" cy="70" r="42" fill="url(#platinumMedal)"/>
+  <circle cx="80" cy="70" r="31" fill="#d1fff6" opacity="0.3"/>
+  <circle cx="80" cy="70" r="27" fill="none" stroke="#ffffff" stroke-opacity="0.8" stroke-width="4"/>
+  <circle cx="80" cy="70" r="44" fill="none" stroke="#d3fff5" stroke-width="4" stroke-dasharray="2 6"/>
+</svg>

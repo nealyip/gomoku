@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 180" role="img" aria-label="Diamond badge">
+  <defs>
+    <linearGradient id="diamondMedal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f3feff"/>
+      <stop offset="42%" stop-color="#6fdfff"/>
+      <stop offset="100%" stop-color="#1f7db3"/>
+    </linearGradient>
+    <linearGradient id="diamondRibbon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c8fbff"/>
+      <stop offset="100%" stop-color="#3299cb"/>
+    </linearGradient>
+  </defs>
+  <path d="M48 96h24l8 18 8-18h24l-12 62-20-18-20 18z" fill="url(#diamondRibbon)"/>
+  <circle cx="80" cy="70" r="46" fill="#2288bc"/>
+  <circle cx="80" cy="70" r="42" fill="url(#diamondMedal)"/>
+  <circle cx="80" cy="70" r="31" fill="#84ebff" opacity="0.3"/>
+  <circle cx="80" cy="70" r="27" fill="none" stroke="#ffffff" stroke-opacity="0.75" stroke-width="4"/>
+  <circle cx="80" cy="70" r="44" fill="none" stroke="#bcf6ff" stroke-width="4" stroke-dasharray="2 6"/>
+</svg>

@@ -156,6 +156,13 @@ h1 {
   border: 1px solid rgba(100, 57, 25, 0.14);
 }
 
+.stats-card {
+  padding: 1rem 1.1rem;
+  border-radius: 20px;
+  background: rgba(255, 248, 233, 0.72);
+  border: 1px solid rgba(100, 57, 25, 0.14);
+}
+
 .status-card strong {
   display: block;
   margin-top: 0.4rem;
@@ -174,6 +181,30 @@ h1 {
   appearance: none;
 }
 
+.stats-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.55rem;
+}
+
+.stats-summary {
+  margin: 0.65rem 0 0;
+  color: rgba(45, 27, 16, 0.82);
+}
+
+.badge-image {
+  width: 74px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 12px rgba(78, 45, 18, 0.16));
+}
+
+.badge-image-large {
+  width: 90px;
+}
+
 .mobile-sticky-field {
   display: grid;
   gap: 0.35rem;
@@ -189,6 +220,10 @@ h1 {
   color: var(--text);
   background: rgba(255, 251, 243, 0.96);
   appearance: none;
+}
+
+.mobile-sticky-stats {
+  display: none;
 }
 
 .button-row {
@@ -569,12 +604,12 @@ button.secondary {
 
   .mobile-sticky-inner {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(112px, 1.1fr) auto auto auto;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
     width: min(100vw - 1rem, 100%);
     margin: 0 auto;
-    padding: 0.35rem 0.45rem;
+    padding: 0.32rem 0.42rem;
     border-radius: 16px;
     background: rgba(255, 248, 236, 0.78);
     border: 1px solid rgba(107, 61, 26, 0.12);
@@ -586,23 +621,40 @@ button.secondary {
     width: auto;
     white-space: nowrap;
     min-height: 36px;
-    padding: 0.55rem 0.85rem;
-    padding-inline: 0.85rem;
+    padding: 0.55rem 0.78rem;
+    padding-inline: 0.78rem;
     border-radius: 999px;
     box-shadow: 0 6px 14px rgba(146, 67, 24, 0.16);
   }
 
+  .mobile-sticky-stats {
+    display: contents;
+  }
+
+  .mobile-sticky-stats .badge {
+    width: 52px;
+  }
+
+  .mobile-sticky-stats strong {
+    display: block;
+    min-width: 58px;
+    text-align: left;
+    font-size: 0.74rem;
+    white-space: nowrap;
+    color: rgba(45, 27, 16, 0.82);
+  }
+
   .mobile-sticky-field {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: auto minmax(84px, 1fr);
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.35rem;
   }
 
   .mobile-sticky-field .label {
     margin: 0;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
     white-space: nowrap;
   }
 
@@ -610,7 +662,11 @@ button.secondary {
     margin: 0;
     min-height: 36px;
     border-radius: 10px;
-    padding: 0.5rem 0.75rem;
+    padding: 0.48rem 0.62rem;
+  }
+
+  .stats-card {
+    display: none;
   }
 
   .app-shell {

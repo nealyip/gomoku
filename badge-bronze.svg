@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 180" role="img" aria-label="Bronze badge">
+  <defs>
+    <linearGradient id="bronzeMedal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffdcae"/>
+      <stop offset="42%" stop-color="#d7924d"/>
+      <stop offset="100%" stop-color="#8e4e22"/>
+    </linearGradient>
+    <linearGradient id="bronzeRibbon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e2a15f"/>
+      <stop offset="100%" stop-color="#9a5628"/>
+    </linearGradient>
+  </defs>
+  <path d="M48 96h24l8 18 8-18h24l-12 62-20-18-20 18z" fill="url(#bronzeRibbon)"/>
+  <circle cx="80" cy="70" r="46" fill="#9a5b2a"/>
+  <circle cx="80" cy="70" r="42" fill="url(#bronzeMedal)"/>
+  <circle cx="80" cy="70" r="31" fill="#a55d2b" opacity="0.35"/>
+  <circle cx="80" cy="70" r="27" fill="none" stroke="#fff2d3" stroke-opacity="0.6" stroke-width="4"/>
+  <circle cx="80" cy="70" r="44" fill="none" stroke="#f9cf90" stroke-width="4" stroke-dasharray="2 6"/>
+</svg>

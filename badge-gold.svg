@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 180" role="img" aria-label="Gold badge">
+  <defs>
+    <linearGradient id="goldMedal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff6ba"/>
+      <stop offset="42%" stop-color="#f5c533"/>
+      <stop offset="100%" stop-color="#c07a00"/>
+    </linearGradient>
+    <linearGradient id="goldRibbon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffe26f"/>
+      <stop offset="100%" stop-color="#cf8c0b"/>
+    </linearGradient>
+  </defs>
+  <path d="M48 96h24l8 18 8-18h24l-12 62-20-18-20 18z" fill="url(#goldRibbon)"/>
+  <circle cx="80" cy="70" r="46" fill="#d08b00"/>
+  <circle cx="80" cy="70" r="42" fill="url(#goldMedal)"/>
+  <circle cx="80" cy="70" r="31" fill="#f2b51e" opacity="0.34"/>
+  <circle cx="80" cy="70" r="27" fill="none" stroke="#fffbd7" stroke-opacity="0.7" stroke-width="4"/>
+  <circle cx="80" cy="70" r="44" fill="none" stroke="#ffdc6b" stroke-width="4" stroke-dasharray="2 6"/>
+</svg>
