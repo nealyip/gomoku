@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260417-2">
+  <link rel="stylesheet" href="style.css?v=20260417-3">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -58,7 +58,7 @@
       <p class="eyebrow">GOMOKU</p>
       <h1>Play Gomoku Online<br>五子棋人機對戰</h1>
       <p class="intro">
-        Play a free five-in-a-row web game in your browser. 你先手執黑子，電腦會用簡單攻守評分去應對，先連成五子就贏。
+        Play a free five-in-a-row web game in your browser. 你先手使用黑子，電腦會以簡單的攻防評分來應對，率先連成五子就獲勝。
       </p>
 
       <ul class="hero-points" aria-label="遊戲特色">
@@ -70,11 +70,11 @@
       <div class="controls">
         <div class="status-card">
           <span class="label">目前狀態</span>
-          <strong id="status">輪到你落子</strong>
+          <strong id="status">輪到你下棋</strong>
         </div>
 
         <div class="button-row">
-          <button id="restartBtn" type="button">重新開局</button>
+          <button id="restartBtn" type="button">重新開始</button>
           <button id="toggleBtn" type="button" class="secondary">關閉提示</button>
         </div>
       </div>
@@ -97,7 +97,7 @@
       <div class="board-header">
         <div>
           <p class="board-title">15 x 15 棋盤</p>
-          <p class="board-subtitle">點一下交叉位落子</p>
+          <p class="board-subtitle">點一下交叉點即可落子</p>
         </div>
         <div class="move-counter">
           <span>步數</span>
@@ -112,7 +112,7 @@
         </svg>
       </div>
 
-      <p class="hint" id="hint">提示已開啟：會標示 robot 上一步。</p>
+      <p class="hint" id="hint">提示已開啟：會標示 robot 上一步的位置。</p>
     </section>
   </main>
 
@@ -124,7 +124,7 @@
         Gomoku, also known as Five in a Row, is a classic strategy board game where two sides take turns placing stones on a grid. The goal is simple: connect five stones in a row horizontally, vertically, or diagonally before your opponent does.
       </p>
       <p>
-        呢個版本係一隻即開即玩嘅五子棋 web game，唔使下載 app，開瀏覽器就可以同簡單 robot 對戰，適合練手、摸規則、或者快速玩一局。
+        這個版本是一款打開瀏覽器就能遊玩的五子棋網頁遊戲，不需要下載 app，就可以和簡單的 robot 對戰，適合練習、熟悉規則，或快速玩上一局。
       </p>
     </section>
 
@@ -133,10 +133,10 @@
         <p class="content-label">How To Play</p>
         <h2>玩法</h2>
         <ol class="content-list">
-          <li>玩家執黑子，第一手先落。</li>
-          <li>每次點一下棋盤交叉位，就會喺該位置落子。</li>
-          <li>Robot 會即時回應，並優先處理進攻同防守機會。</li>
-          <li>任何一方先連成五子，就取得勝利。</li>
+          <li>玩家使用黑子，第一手先下。</li>
+          <li>每次點一下棋盤交叉點，就會在該位置落子。</li>
+          <li>Robot 會立即回應，並優先處理進攻與防守機會。</li>
+          <li>任一方先連成五子，就能獲得勝利。</li>
         </ol>
       </article>
 
@@ -147,7 +147,7 @@
           <li>免費線上遊玩，適合快速開局。</li>
           <li>支援手機與桌面瀏覽器。</li>
           <li>簡單 AI 對手，適合新手練習基本攻守。</li>
-          <li>有即時狀態提示、步數統計、重新開始與提示開關。</li>
+          <li>提供即時狀態提示、步數統計、重新開始與提示開關。</li>
         </ul>
       </article>
     </section>
@@ -187,12 +187,12 @@
       <h2 id="resultTitle">對局結束</h2>
       <p id="resultText">這一局已經分出勝負。</p>
       <div class="result-actions">
-        <button id="playAgainBtn" type="button">再開一局</button>
-        <button id="closeModalBtn" type="button" class="secondary">睇返棋盤</button>
+        <button id="playAgainBtn" type="button">再玩一局</button>
+        <button id="closeModalBtn" type="button" class="secondary">查看棋盤</button>
       </div>
     </section>
   </div>
 
-  <script src="script.js?v=20260417-2"></script>
+  <script src="script.js?v=20260417-3"></script>
 </body>
 </html>

@@ -58,9 +58,9 @@ function resetGame() {
   moveCount = 0;
   lastMove = null;
   winningCells = [];
-  updateStatus("輪到你落子");
+  updateStatus("輪到你下棋");
   moveCountElement.textContent = "0";
-  hintElement.textContent = showHint ? "提示已開啟：會標示 robot 上一步。" : "提示已關閉。";
+  hintElement.textContent = showHint ? "提示已開啟：會標示 robot 上一步的位置。" : "提示已關閉。";
   hideResultModal();
   clearWinLine();
   renderBoard();
@@ -105,12 +105,12 @@ function handlePlayerMove(event) {
   const playerWinningLine = findWinningLine(row, col, PLAYER);
 
   if (playerWinningLine) {
-    finishGame("你贏咗，恭喜！", playerWinningLine);
+    finishGame("你贏了，恭喜！", playerWinningLine);
     return;
   }
 
   if (moveCount === BOARD_SIZE * BOARD_SIZE) {
-    finishGame("和局，再嚟一盤？");
+    finishGame("平手，再玩一局嗎？");
     return;
   }
 
@@ -121,7 +121,7 @@ function handlePlayerMove(event) {
     const robotMove = chooseRobotMove();
 
     if (!robotMove) {
-      finishGame("和局，再嚟一盤？");
+      finishGame("平手，再玩一局嗎？");
       return;
     }
 
@@ -132,17 +132,17 @@ function handlePlayerMove(event) {
     const robotWinningLine = findWinningLine(robotMove.row, robotMove.col, ROBOT);
 
     if (robotWinningLine) {
-      finishGame("Robot 贏咗，再挑戰一次！", robotWinningLine);
+      finishGame("Robot 贏了，再挑戰一次！", robotWinningLine);
       return;
     }
 
     if (moveCount === BOARD_SIZE * BOARD_SIZE) {
-      finishGame("和局，再嚟一盤？");
+      finishGame("平手，再玩一局嗎？");
       return;
     }
 
     robotThinking = false;
-    updateStatus("輪到你落子");
+    updateStatus("輪到你下棋");
   }, 280);
 }
 
@@ -396,7 +396,7 @@ function getLineCoordinate(cell) {
 }
 
 function showResultModal(message) {
-  const title = message.includes("和局") ? "和局" : message.includes("Robot") ? "Robot 勝出" : "你贏咗";
+  const title = message.includes("平手") ? "平手" : message.includes("Robot") ? "Robot 勝利" : "你贏了";
   resultTitleElement.textContent = title;
   resultTextElement.textContent = message;
   resultModalElement.classList.add("open");
@@ -422,7 +422,7 @@ resultBackdropElement.addEventListener("click", hideResultModal);
 toggleButton.addEventListener("click", () => {
   showHint = !showHint;
   toggleButton.textContent = showHint ? "關閉提示" : "開啟提示";
-  hintElement.textContent = showHint ? "提示已開啟：會標示 robot 上一步。" : "提示已關閉。";
+  hintElement.textContent = showHint ? "提示已開啟：會標示 robot 上一步的位置。" : "提示已關閉。";
   renderBoard();
 });
 
