@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260417-2">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -107,6 +107,9 @@
 
       <div class="board-wrap">
         <div id="board" class="board" aria-label="五子棋棋盤" role="grid"></div>
+        <svg id="winLine" class="win-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <line id="winLinePath" x1="0" y1="0" x2="0" y2="0"></line>
+        </svg>
       </div>
 
       <p class="hint" id="hint">提示已開啟：會標示 robot 上一步。</p>
@@ -177,6 +180,19 @@
     </section>
   </section>
 
-  <script src="script.js"></script>
+  <div id="resultModal" class="result-modal" aria-hidden="true">
+    <div id="resultBackdrop" class="result-backdrop"></div>
+    <section class="result-card" role="dialog" aria-modal="true" aria-labelledby="resultTitle" aria-describedby="resultText">
+      <p class="result-kicker">Game Result</p>
+      <h2 id="resultTitle">對局結束</h2>
+      <p id="resultText">這一局已經分出勝負。</p>
+      <div class="result-actions">
+        <button id="playAgainBtn" type="button">再開一局</button>
+        <button id="closeModalBtn" type="button" class="secondary">睇返棋盤</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js?v=20260417-2"></script>
 </body>
 </html>

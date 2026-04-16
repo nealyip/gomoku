@@ -16,6 +16,14 @@ const moveCountElement = document.getElementById("moveCount");
 const hintElement = document.getElementById("hint");
 const restartButton = document.getElementById("restartBtn");
 const toggleButton = document.getElementById("toggleBtn");
+const winLineElement = document.getElementById("winLine");
+const winLinePathElement = document.getElementById("winLinePath");
+const resultModalElement = document.getElementById("resultModal");
+const resultBackdropElement = document.getElementById("resultBackdrop");
+const playAgainButton = document.getElementById("playAgainBtn");
+const closeModalButton = document.getElementById("closeModalBtn");
+const resultTitleElement = document.getElementById("resultTitle");
+const resultTextElement = document.getElementById("resultText");
 
 let board = [];
 let gameOver = false;
@@ -23,6 +31,7 @@ let robotThinking = false;
 let moveCount = 0;
 let showHint = true;
 let lastMove = null;
+let winningCells = [];
 
 function createBoard() {
   boardElement.innerHTML = "";
@@ -48,9 +57,12 @@ function resetGame() {
   robotThinking = false;
   moveCount = 0;
   lastMove = null;
+  winningCells = [];
   updateStatus("輪到你落子");
   moveCountElement.textContent = "0";
   hintElement.textContent = showHint ? "提示已開啟：會標示 robot 上一步。" : "提示已關閉。";
+  hideResultModal();
+  clearWinLine();
   renderBoard();
 }
 
@@ -90,8 +102,10 @@ function handlePlayerMove(event) {
 
   placeStone(row, col, PLAYER);
 
-  if (checkWin(row, col, PLAYER)) {
-    finishGame("你贏咗，恭喜！");
+  const playerWinningLine = findWinningLine(row, col, PLAYER);
+
+  if (playerWinningLine) {
+    finishGame("你贏咗，恭喜！", playerWinningLine);
     return;
   }
 
@@ -115,8 +129,10 @@ function handlePlayerMove(event) {
     lastMove = robotMove;
     renderBoard();
 
-    if (checkWin(robotMove.row, robotMove.col, ROBOT)) {
-      finishGame("Robot 贏咗，再挑戰一次！");
+    const robotWinningLine = findWinningLine(robotMove.row, robotMove.col, ROBOT);
+
+    if (robotWinningLine) {
+      finishGame("Robot 贏咗，再挑戰一次！", robotWinningLine);
       return;
     }
 
@@ -142,10 +158,17 @@ function placeStone(row, col, player) {
   renderBoard();
 }
 
-function finishGame(message) {
+function finishGame(message, lineCells = []) {
   gameOver = true;
   robotThinking = false;
+  winningCells = lineCells;
   updateStatus(message);
+  if (lineCells.length > 0) {
+    drawWinLine(lineCells);
+  } else {
+    clearWinLine();
+  }
+  showResultModal(message);
 }
 
 function updateStatus(message) {
@@ -153,10 +176,19 @@ function updateStatus(message) {
 }
 
 function checkWin(row, col, player) {
-  return DIRECTIONS.some(([dr, dc]) => {
-    const total = 1 + countDirection(row, col, dr, dc, player) + countDirection(row, col, -dr, -dc, player);
-    return total >= WIN_LENGTH;
-  });
+  return Boolean(findWinningLine(row, col, player));
+}
+
+function findWinningLine(row, col, player) {
+  for (const [dr, dc] of DIRECTIONS) {
+    const line = collectLine(row, col, dr, dc, player);
+
+    if (line.length >= WIN_LENGTH) {
+      return line.slice(0, WIN_LENGTH);
+    }
+  }
+
+  return null;
 }
 
 function countDirection(row, col, dr, dc, player) {
@@ -171,6 +203,29 @@ function countDirection(row, col, dr, dc, player) {
   }
 
   return total;
+}
+
+function collectLine(row, col, dr, dc, player) {
+  const cells = [{ row, col }];
+  let nextRow = row + dr;
+  let nextCol = col + dc;
+
+  while (isInside(nextRow, nextCol) && board[nextRow][nextCol] === player) {
+    cells.push({ row: nextRow, col: nextCol });
+    nextRow += dr;
+    nextCol += dc;
+  }
+
+  nextRow = row - dr;
+  nextCol = col - dc;
+
+  while (isInside(nextRow, nextCol) && board[nextRow][nextCol] === player) {
+    cells.unshift({ row: nextRow, col: nextCol });
+    nextRow -= dr;
+    nextCol -= dc;
+  }
+
+  return cells;
 }
 
 function chooseRobotMove() {
@@ -311,17 +366,70 @@ function evaluatePositionalScore(row, col) {
   return Math.max(0, 16 - distance) * 3;
 }
 
+function drawWinLine(lineCells) {
+  const start = getLineCoordinate(lineCells[0]);
+  const end = getLineCoordinate(lineCells[lineCells.length - 1]);
+
+  winLinePathElement.setAttribute("x1", start.x.toFixed(2));
+  winLinePathElement.setAttribute("y1", start.y.toFixed(2));
+  winLinePathElement.setAttribute("x2", end.x.toFixed(2));
+  winLinePathElement.setAttribute("y2", end.y.toFixed(2));
+  winLineElement.classList.add("active");
+}
+
+function clearWinLine() {
+  winLineElement.classList.remove("active");
+  winLinePathElement.setAttribute("x1", "0");
+  winLinePathElement.setAttribute("y1", "0");
+  winLinePathElement.setAttribute("x2", "0");
+  winLinePathElement.setAttribute("y2", "0");
+}
+
+function getLineCoordinate(cell) {
+  const step = 100 / BOARD_SIZE;
+  const offset = step / 2;
+
+  return {
+    x: offset + cell.col * step,
+    y: offset + cell.row * step,
+  };
+}
+
+function showResultModal(message) {
+  const title = message.includes("和局") ? "和局" : message.includes("Robot") ? "Robot 勝出" : "你贏咗";
+  resultTitleElement.textContent = title;
+  resultTextElement.textContent = message;
+  resultModalElement.classList.add("open");
+  resultModalElement.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+}
+
+function hideResultModal() {
+  resultModalElement.classList.remove("open");
+  resultModalElement.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+}
+
 function isInside(row, col) {
   return row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE;
 }
 
 restartButton.addEventListener("click", resetGame);
+playAgainButton.addEventListener("click", resetGame);
+closeModalButton.addEventListener("click", hideResultModal);
+resultBackdropElement.addEventListener("click", hideResultModal);
 
 toggleButton.addEventListener("click", () => {
   showHint = !showHint;
   toggleButton.textContent = showHint ? "關閉提示" : "開啟提示";
   hintElement.textContent = showHint ? "提示已開啟：會標示 robot 上一步。" : "提示已關閉。";
   renderBoard();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && resultModalElement.classList.contains("open")) {
+    hideResultModal();
+  }
 });
 
 createBoard();

@@ -25,6 +25,10 @@ body {
     linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 body::before,
 body::after {
   content: "";
@@ -267,6 +271,7 @@ button.secondary {
 }
 
 .board-wrap {
+  position: relative;
   display: grid;
   place-items: center;
   padding: 1rem;
@@ -290,6 +295,28 @@ button.secondary {
   border: 2px solid rgba(71, 39, 15, 0.6);
   border-radius: 14px;
   overflow: hidden;
+}
+
+.win-line {
+  position: absolute;
+  inset: 1rem;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+  pointer-events: none;
+  overflow: visible;
+}
+
+.win-line line {
+  stroke: rgba(187, 40, 28, 0.92);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  filter: drop-shadow(0 2px 6px rgba(118, 18, 18, 0.26));
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.win-line.active line {
+  opacity: 1;
 }
 
 .cell {
@@ -396,6 +423,69 @@ button.secondary {
   font-size: 1rem;
 }
 
+.result-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.result-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.result-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(33, 20, 12, 0.42);
+  backdrop-filter: blur(10px);
+}
+
+.result-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 420px);
+  padding: 1.5rem;
+  border-radius: 28px;
+  border: 1px solid rgba(107, 61, 26, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 248, 236, 0.97), rgba(236, 206, 158, 0.95)),
+    rgba(255, 255, 255, 0.88);
+  box-shadow: 0 24px 70px rgba(46, 24, 12, 0.25);
+}
+
+.result-kicker {
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.result-card h2 {
+  margin: 0;
+  font-family: "Noto Serif TC", serif;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+}
+
+.result-card p {
+  color: rgba(45, 27, 16, 0.82);
+  line-height: 1.7;
+}
+
+.result-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(0.86);
@@ -443,6 +533,12 @@ button.secondary {
     padding: 0.75rem;
   }
 
+  .win-line {
+    inset: 0.75rem;
+    width: calc(100% - 1.5rem);
+    height: calc(100% - 1.5rem);
+  }
+
   .button-row {
     flex-direction: column;
   }
@@ -459,5 +555,14 @@ button.secondary {
   .content-card {
     padding: 1.2rem;
     border-radius: 24px;
+  }
+
+  .result-card {
+    padding: 1.25rem;
+    border-radius: 24px;
+  }
+
+  .result-actions {
+    flex-direction: column;
   }
 }
