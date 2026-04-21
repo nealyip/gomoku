@@ -163,6 +163,13 @@ h1 {
   border: 1px solid rgba(100, 57, 25, 0.14);
 }
 
+.badge-rule-card {
+  padding: 1rem 1.1rem;
+  border-radius: 20px;
+  background: rgba(255, 248, 233, 0.72);
+  border: 1px solid rgba(100, 57, 25, 0.14);
+}
+
 .status-card strong {
   display: block;
   margin-top: 0.4rem;
@@ -192,6 +199,19 @@ h1 {
 .stats-summary {
   margin: 0.65rem 0 0;
   color: rgba(45, 27, 16, 0.82);
+}
+
+.badge-rule-intro {
+  margin: 0.55rem 0 0;
+  color: rgba(45, 27, 16, 0.82);
+  line-height: 1.6;
+}
+
+.badge-rule-list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
+  color: rgba(45, 27, 16, 0.82);
+  line-height: 1.65;
 }
 
 .badge-image {
